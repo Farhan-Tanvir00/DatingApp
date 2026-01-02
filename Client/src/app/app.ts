@@ -1,23 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { Nav } from '../layout/nav/nav';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Nav],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
-export class App implements OnInit {
-  private httpClient = inject(HttpClient);
-  protected readonly title = signal('Dating App');
-  protected members = signal<any>([]);
-
-  ngOnInit(): void {
-    this.httpClient.get('https://localhost:5001/api/members').subscribe({
-      next: (res) => this.members.set(res),
-      error: (err) => console.log(err),
-      complete: () => console.log('Completed Fetching'),
-    });
-  }
+export class App {
+  protected router = inject(Router);
 }
