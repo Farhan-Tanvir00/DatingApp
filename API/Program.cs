@@ -1,5 +1,6 @@
 using System.Text;
 using API.Data;
+using API.Middlewares;
 using API.Services.TokenService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ var app = builder.Build();
 //     app.MapOpenApi();
 // }
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors(x=> x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200", "https://localhost:4200"));
 
 app.UseAuthentication();

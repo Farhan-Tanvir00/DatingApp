@@ -18,6 +18,8 @@
     <Folder Include="DTOs\" />
     <Folder Include="Entensions\" />
     <Folder Include="Entities\" />
+    <Folder Include="Errors\" />
+    <Folder Include="Middlewares\" />
     <Folder Include="Services\" />
     <Folder Include="Services\TokenService\" />
   </ItemGroup>
