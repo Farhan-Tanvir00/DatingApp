@@ -2,11 +2,12 @@ using System;
 using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
-using API.Entensions;
+using API.Extensions;
 using API.Entities;
 using API.Services.TokenService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace API.Controllers;
 
@@ -35,7 +36,7 @@ public class AccountController : BaseApiController
         {
             Email = registerDTO.Email,
             DisplayName = registerDTO.DisplayName,
-            PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(registerDTO.Password)),
+            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDTO.Password)),
             PasswordSalt = hmac.Key
         };
 
@@ -54,7 +55,7 @@ public class AccountController : BaseApiController
         if(user == null) return Unauthorized("Invalid email");
 
         using var hmac = new HMACSHA512(user.PasswordSalt);
-        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(loginDTO.Password));
+        var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password));
 
         if(!computedHash.SequenceEqual(user.PasswordHash))
         {

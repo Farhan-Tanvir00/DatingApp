@@ -3,7 +3,7 @@ using API.DTOs;
 using API.Entities;
 using API.Services.TokenService;
 
-namespace API.Entensions;
+namespace API.Extensions;
 
 public static class AppUserExtension
 {

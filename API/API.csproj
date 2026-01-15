@@ -16,7 +16,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="DTOs\" />
-    <Folder Include="Entensions\" />
+    <Folder Include="Extensions\" />
     <Folder Include="Entities\" />
     <Folder Include="Errors\" />
     <Folder Include="Middlewares\" />
