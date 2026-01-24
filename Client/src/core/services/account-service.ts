@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { User, UserRegister } from '../../types/User';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { MemberService } from './member-service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class AccountService {
         if (user) {
           this.setCurrentUser(user);
         }
-      })
+      }),
     );
   }
 
@@ -34,11 +35,11 @@ export class AccountService {
         if (user) {
           this.setCurrentUser(user);
         }
-      })
+      }),
     );
   }
 
-  private setCurrentUser(user: User) {
+  public setCurrentUser(user: User) {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUser.set(user);
   }

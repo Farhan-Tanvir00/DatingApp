@@ -22,6 +22,13 @@ public class MemberRepository : IMemberRepository
         return await _context.Members.ToListAsync();
     }
 
+    public async Task<Member?> GetMemberForUpdateAsync(string userId)
+    {
+        return await _context.Members
+                     .Include(m=> m.User)
+                     .SingleOrDefaultAsync(m => m.UserId == userId);
+    }
+
     public async Task<IReadOnlyList<Photo>> GetPhotosByMemberIdAsync(string memberId)
     {
         // return await _context.Photos
@@ -44,3 +51,4 @@ public class MemberRepository : IMemberRepository
         _context.Entry(member).State = EntityState.Modified;
     }
 }
+ 
